@@ -1,0 +1,31 @@
+﻿@model IEnumerable<LaboratorioAlbum.Models.Sticker>
+@{
+    ViewBag.Title = "MostrarDiccionario";
+}
+
+<h3>Lista de Stickers de @ViewBag.Msg </h3>
+
+<p>
+    @Html.ActionLink("Menu Principal", "Index")
+</p>
+<table class="table table-hover">
+    <tr class="table">
+        <th>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr class="table">
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td class="table-dark">
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+        </tr>
+    }
+</table>

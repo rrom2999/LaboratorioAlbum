@@ -95,7 +95,7 @@ namespace LaboratorioAlbum.S
                     Diccionario1.Add(InfoSeparada[0], Informacion);
                 }
                 else { C++; }
-            }
+            
             }
         }
 

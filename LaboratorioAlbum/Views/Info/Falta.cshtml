@@ -1,0 +1,32 @@
+﻿@model IEnumerable<LaboratorioAlbum.Models.Dic2>
+@{
+    ViewBag.Title = "Falta";
+}
+
+<h4>Stickers faltantes</h4>
+
+<p>
+    @Html.ActionLink("Menu Principal", "Index")
+</p>
+<table class="table table-hover">
+    <tr class="table">
+        <th>
+            @Html.DisplayNameFor(model => model.Num)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Equipo)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr class="table">
+            <td>
+                @Html.DisplayFor(modelItem => item.Num)
+            </td>
+            <td class="table-dark">
+                @Html.DisplayFor(modelItem => item.Equipo)
+            </td>
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "CargarArchivo";
+}
+
+<h4>CargarArchivo</h4>
+
+<div class="jumbotron">
+    <h2 class="display-3">Albbum UEFA Champions League</h2>
+    <p class="lead">Carga el archivo con tus stickers y informate de tu progreso</p>
+    <hr class="my-4">
+    <p class="lead">
+        @using (Html.BeginForm("Subir", "Info", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+        <p>Subir archivo</p>
+        <input type="file" name="archivo" />
+        <hr />
+        <input type="submit" value="Subir" class="btn btn-outline-success" />
+    }
+        </p>
+        <h6>@ViewBag.Msg</h6>
+    </div>

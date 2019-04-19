@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Menu Principal</h2>
+
+<h5> Agregar Sticker</h5>
+<h6 style="color:#ff0000" ;>@ViewBag.Msg</h6>
+<ul>
+    @using (Html.BeginForm("Agregar", "Info", FormMethod.Post))
+    {
+        <p>Equipo</p>
+        <input type="text" name="Equipo" id="Equipo" />
+
+        <p>Numero de Sticker </p>
+        <input type="text" name="ID" id="ID" />
+
+        <input type="submit" value="Agregar Sticker" />
+    }
+</ul>
+<p>
+    @Html.ActionLink("Mostrar Stickers Faltantes", "Falta")
+</p>
+<table class="table table-hover">
+    <tr class="table">
+        <th>
+            EQUIPO
+        </th>
+        <th>
+            OPCIONES
+        </th>
+    </tr>
+    @foreach (var item in LaboratorioAlbum.S.Datos.Instancia.ListadoEquipos)
+    {
+        <tr class="table">
+            <td>
+                @Html.DisplayFor(modelItem => item)
+            </td>
+            <td class="table-dark">
+                @Html.ActionLink("Ir a Equipo", "MostrarListas", new { Key = item })
+            </td>
+        </tr>
+    }
+</table>
+

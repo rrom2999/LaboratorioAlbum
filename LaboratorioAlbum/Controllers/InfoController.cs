@@ -52,7 +52,7 @@ namespace LaboratorioAlbum.Controllers
             string direccion = "";
             if (archivo != null &&  archivo.ContentLength > 0)
             {
-                direccion = Server.MapPath("~/Upload/") + archivo.FileName;
+                direccion = Server.MapPath("~/EXCEL/") + archivo.FileName;
 
                 archivo.SaveAs(direccion);
                 Datos.Instancia.LlenadodeAlbum(direccion);
@@ -89,7 +89,76 @@ namespace LaboratorioAlbum.Controllers
                 ViewBag.Mensaje = "Datos actualizados, sticker agregado.";
                 ViewBag.Msg = "";
 
+                foreach (var estampa in Datos.Instancia.Diccionario1[Equipo].Completo) //Metodo para buscar con el codigo para cambiar a existente en diccionarios
+                {
+                    if (estampa.Codigo == int.Parse(ID))
+                    {
+                        estampa.Cantidad = 1;
+                        estampa.Existe = true;
+                        Datos.Instancia.Diccionario2[Llave] = true;
+                        Datos.Instancia.Diccionario1[Equipo].Tiene.Add(estampa);
+                        break;
+                    }
+                }
+                foreach (var estampa in Datos.Instancia.Diccionario1[Equipo].Falta) //Metodo para remover en faltantes de diccionario1
+                {
+                    if (estampa.Codigo == int.Parse(ID))
+                    {
+                        Datos.Instancia.Diccionario1[Equipo].Falta.Remove(estampa);
+                        break;
+                    }
+                }
+                foreach (var estampa in Datos.Instancia.ListadoFaltantes) //Metodo
+                {
+                    if (estampa.Num == ID)
+                    {
+                        Datos.Instancia.ListadoFaltantes.Remove(estampa);
+                        break;
+                    }
+                }
+                return View();
+            }else if (Datos.Instancia.Diccionario2.ContainsKey(Llave) == false)
+            {
+                ViewBag.Msg = "Sticker no se encuentra disponible";
+                return View("Index");
             }
+            else if (Datos.Instancia.Diccionario2[Llave] == true)
+            {
+                ViewBag.Mensaje = "El sticker ya se encuentra agregado";
+                return View();
+            }
+            else
+            {
+                return View("Index");
+            }
+        }
+
+
+        public ActionResult MostrarDiccionario(int Listado)
+        {
+            try
+            {
+                if (Listado == 1)
+                {
+                    ViewBag.Msg = "FALTANTES:";
+                    return View(Datos.Instancia.Diccionario1[key].Falta);
+                }
+                else if (Listado == 2)
+                {
+                    ViewBag.Msg = "OBTENNIDAS";
+                    return View(Datos.Instancia.Diccionario1[key].Tiene);
+                }
+                else if (Listado == 3)
+                {
+                    ViewBag.Msg = "REPETIDAS";
+                    return View(Datos.Instancia.Diccionario1[key].Repetidas);
+                }
+                return View();
+            }
+            catch
+            {
+                return View();
+            } 
         }
     }
 }
